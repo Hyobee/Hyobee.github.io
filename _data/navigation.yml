@@ -1,11 +1,11 @@
 # main links
 main:
   - title: "Home"
-    url: https://hyobee.github.io/
+    url: /categories/
   - title: "React"
-    url: /react/
+    url: /categories/react/
   - title: "Javascript"
-    url: /javascript/
+    url: /categories/javascript/
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"
