@@ -1,6 +1,6 @@
 ---
 title: "Study javascript"
-layout: categories
+layout: category
 permalink: /categories/javascript/
 author_profile: true
 taxonomy: javascript
