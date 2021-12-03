@@ -3,9 +3,9 @@ main:
   - title: "Home"
     url: /categories/
   - title: "React"
-    url: /categories/react/
+    url: /react/
   - title: "Javascript"
-    url: /categories/javascript/
+    url: /javascript/
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"

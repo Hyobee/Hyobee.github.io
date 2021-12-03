@@ -1,7 +1,7 @@
 ---
 title: "Study react"
 layout: categories
-permalink: /categories/react/
+permalink: /react/
 author_profile: true
 taxonomy: react
 categories:

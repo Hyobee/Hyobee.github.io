@@ -1,7 +1,7 @@
 ---
 title: "Study javascript"
-layout: category
-permalink: /categories/javascript/
+layout: categories
+permalink: /javascript/
 author_profile: true
 taxonomy: javascript
 categories:
