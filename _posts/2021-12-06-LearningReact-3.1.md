@@ -17,8 +17,6 @@ tags:
 3. 함수를 다른 **함수에 인자**로 넘길 수 있다.
 4. 함수가 **함수를 반환**할 수 있다.
 
-
-
 ## 1. 함수를 **변수**에 넣을 수 있다.
 ```jsx
 var log = function(message){
@@ -98,6 +96,5 @@ createScream 고차함수를 화살표 함수로 표현할 수도 있다.
 ```jsx
 ```
 
-
-관련 링크
-[함수형 프로그래밍 관련 블로그글](https://sungjk.github.io/2017/07/17/fp.html)
+## 출처
+[함수형 프로그래밍이란 무엇인가?](https://sungjk.github.io/2017/07/17/fp.html)
