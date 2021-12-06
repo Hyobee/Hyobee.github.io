@@ -17,7 +17,7 @@ tags:
 3. 함수를 다른 **함수에 인자**로 넘길 수 있다.
 4. 함수가 **함수를 반환**할 수 있다.
 
-[객체](/javascript/object)
+[객체](https://hyobee.github.io/javascript/object)
 
 ## 1. 함수를 **변수**에 넣을 수 있다.
 ```jsx
