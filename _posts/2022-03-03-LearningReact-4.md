@@ -1,5 +1,5 @@
 ---
-title:  "4. 리액트 작동원리"
+title: "4.0.0 리액트 작동원리"
 permalink: /react/
 categories:
   - React
@@ -8,8 +8,7 @@ tags:
 ---
 
 ## 4.1 페이지 설정
-
-래액트를 브라우저에서 다루려면 React, ReactDOM 라이브러리를 불라와야 함.
+래액트를 브라우저에서 다루려면 React, ReactDOM 라이브러리를 불러와야 함.
 React는 뷰를 위한 라이브러리, ReactDOM은 UI를 실제로 브라우저에 렌더링할 때 사용하는 라이브러리다.
 아래 코드는 브라우저에서 리액트를 사용하기 위한 최소한의 요구사항이다.
 
@@ -40,17 +39,17 @@ React는 뷰를 위한 라이브러리, ReactDOM은 UI를 실제로 브라우저
 ```
 
 ## 4.2 리액트 엘리먼트
-HTML을 DOM을 구서하기 위해 따라야하는 절차
+HTML을 DOM을 구사하기 위해 따라야하는 절차
 
-### 전통적인 방식
+### 4.2.1 전통적인 방식
 전통적으로 웹사이트는 독립적인 HTML 페이지들로 만들어졌다. 사용자가 페이지 사이를 내비게이션 함에 따라 브라우저는 매번 다른 HTML문서를 요청해서 로딩할 수 있었다.
 
-### SPA(Single Page Application)
-유래
+### 4.2.2 SPA(Single Page Application)
+#### 유래
 AJAX(Asynchronous Javascript and XML)가 생기면서 단일 페이지 애플리케이션인 SPA가 생겼다.
 브라우저가 AJAX를 이용해 아주 작은 데이터를 요청해서 가져올 수 있게됨에 따라 이제는 전체 웹 애플리케이션이 한 페이지로 실행되면서 자바스크립트에 의존해 사용자 인터페이스를 갱신하게 됐다.
 
-작동원리
+#### 작동원리
 SPA애서 처음에 브라우저는 HTML문서를 하나 적재한다. 사용자는 사이트를 내비게이션 하지만 실제로는 같은 페이지 안에 계속 머문다. 자바스크립트는 사용자가 애플리케이션과 상호 작용하는 것에 맞춰 표시중이던 인터페이스를 없애고 새로운 사용자 인터페이스를 만든다.
 사용자가 느끼기에는 한 페이지에서 다른 페이지로 이동한 것 같지만 실제로 사용자는여전히 같은 HTML페이지 안에 머물 뿐이고 자바스크립트가 모든 힘든 처리를 대신 해준다.
 
@@ -66,7 +65,7 @@ React.createElement(
   "구운 연어"         // 자식노드
 )
 
-결과
+# 결과
 <h1 id="recipe-0">구운연어</h1>
 ```
 
@@ -83,7 +82,7 @@ ReactDOM.render(
   document.getElementById('react-container') // 렌더링이 일어날 대상 DOM 노드
 )
 
-결과
+# 결과
 <body>
   <div id="root">
     <h1>구운연어</h1>
@@ -161,7 +160,7 @@ React.createElement(
   React.createElement("li", null, "다진 마늘 4 쪽")
 );
 
-이 재료를 더 간단하게 표현할 수 있다.
+// 이 재료를 더 간단하게 표현할 수 있다.
 
 const items = [
   "연어 900 그램",
@@ -172,7 +171,7 @@ const items = [
   "다진 마늘 4 쪽"
 ];
 
-map을 통해 하드코딩 없이 원하는 만큼 리스트 원소를 생성할 수 있다.
+// map을 통해 하드코딩 없이 원하는 만큼 리스트 원소를 생성할 수 있다.
 
 React.createElement(
   "ul",
@@ -180,7 +179,7 @@ React.createElement(
   items.map(ingredient => ReactElement("li", null, ingredient))
 );
 
-배열의 반복을 통해 엘리먼트 생성시 key 프로퍼티를 이용할 수 있다.
+// 배열의 반복을 통해 엘리먼트 생성시 key 프로퍼티를 이용할 수 있다.
 
 React.createElement(
   "ul",
@@ -188,7 +187,7 @@ React.createElement(
   items.map((ingredient, i) => ReactElement("li", {key: i}, ingredient))
 );
 
-콘솔 경고를 없애기 위해 키를 일단은 추가하자.
+// 콘솔 경고를 없애기 위해 키를 일단은 추가하자.
 ```
 
 ## 4.4 리액트 컴포넌트
@@ -249,7 +248,7 @@ const secretIngredients = [
   "소금 0.5 티스푼"
 ]
 
-IngredientsList 컴포넌트가 이 items를 map하게 해서 items 배열에 있는 모든 내용에 대해 li를 만들게 한다.
+// IngredientsList 컴포넌트가 이 items를 map하게 해서 items 배열에 있는 모든 내용에 대해 li를 만들게 한다.
 
 function IngredientsList(){
   return React.createElement(
@@ -259,7 +258,7 @@ function IngredientsList(){
   );
 }
 
-그 후 secretIngredients를 items라는 프로퍼티로 넘기면 된다. items 프로퍼티는 createElement의 두 번쨰 인자다.
+// 그 후 secretIngredients를 items라는 프로퍼티로 넘기면 된다. items 프로퍼티는 createElement의 두 번쨰 인자다.
 
 ReactDOM.render(
   React.createElement(
@@ -314,6 +313,3 @@ function IngredientsList({items}){
 ```
 
 IngredientsList와 관련된모든 내용은 이제 한 컴포넌트 안에 캡슐화되어 있다. 컴포넌트를 처리할 때 필요한 모든 것이 컴포넌트 내부에 들어 있다.
-
-## 출처
-[인수(Argument)와 인자(Parameter, 매개변수)의 차이](https://amagrammer91.tistory.com/9)

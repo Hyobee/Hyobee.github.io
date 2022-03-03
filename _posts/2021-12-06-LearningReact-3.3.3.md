@@ -1,5 +1,5 @@
 ---
-title:  "3.3.3 데이터 변환"
+title: "3.3.3 데이터 변환"
 permalink: /javascript/
 categories:
   - Javascript
