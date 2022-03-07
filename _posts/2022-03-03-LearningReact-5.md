@@ -1,6 +1,6 @@
 ---
 title: "5.0.0 JSX를 사용하는 리액트"
-permalink: /react/
+permalink: /react/5.0
 categories:
   - React
 tags:

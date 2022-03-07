@@ -1,6 +1,6 @@
 ---
 title:  "3.3.2 순수 함수"
-permalink: /javascript/
+permalink: /javascript/3.3.2
 categories:
   - Javascript
 tags:

@@ -1,6 +1,6 @@
 ---
 title:  "3.1 함수형이란 무엇인가?"
-permalink: /javascript/
+permalink: /javascript/3.1
 categories:
   - Javascript
 tags:

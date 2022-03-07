@@ -1,6 +1,6 @@
 ---
 title:  "3.2 명령형 프로그래밍과 선언적 프로그래밍 비교"
-permalink: /javascript/
+permalink: /javascript/3.2
 categories:
   - Javascript
 tags:

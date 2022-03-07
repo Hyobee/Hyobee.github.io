@@ -1,6 +1,6 @@
 ---
 title: "4.0.0 리액트 작동원리"
-permalink: /react/
+permalink: /react/4.0
 categories:
   - React
 tags:
