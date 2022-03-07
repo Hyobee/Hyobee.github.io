@@ -1,6 +1,6 @@
 ---
 title:  "3.3.1 불변성"
-permalink: /javascript/3.3.1
+permalink: /javascript/불변성
 categories:
   - Javascript
 tags:

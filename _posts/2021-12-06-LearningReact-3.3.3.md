@@ -1,6 +1,6 @@
 ---
 title: "3.3.3 데이터 변환"
-permalink: /javascript/3.3.3
+permalink: /javascript/데이터변환
 categories:
   - Javascript
 tags:

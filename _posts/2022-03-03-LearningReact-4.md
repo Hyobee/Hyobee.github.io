@@ -1,6 +1,6 @@
 ---
 title: "4.0.0 리액트 작동원리"
-permalink: /react/4.0
+permalink: /react/리액트작동원리
 categories:
   - React
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 ## 4.1 페이지 설정
-래액트를 브라우저에서 다루려면 React, ReactDOM 라이브러리를 불러와야 함.
+리액트를 브라우저에서 다루려면 React, ReactDOM 라이브러리를 불러와야 함.
 React는 뷰를 위한 라이브러리, ReactDOM은 UI를 실제로 브라우저에 렌더링할 때 사용하는 라이브러리다.
 아래 코드는 브라우저에서 리액트를 사용하기 위한 최소한의 요구사항이다.
 
@@ -78,8 +78,8 @@ React.createElement(
 const dish = React.createElement("h1", null, "Baked Salmon")
 
 ReactDOM.render(
-  dish,                                      // 렌더링할 리액트 엘리먼트
-  document.getElementById('react-container') // 렌더링이 일어날 대상 DOM 노드
+  dish,                           // 렌더링할 리액트 엘리먼트
+  document.getElementById('root') // 렌더링이 일어날 대상 DOM 노드
 )
 
 # 결과
