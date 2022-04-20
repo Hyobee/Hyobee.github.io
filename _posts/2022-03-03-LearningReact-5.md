@@ -48,7 +48,7 @@ JSX 에서는 다른 컴포넌트의 자식으로 컴포넌트를 추가할 수 
 
 ```jsx
 <h1>{"Hello" + title}</h1>
-<h1>{title.toLowerCase().replace}<ß/h1>
+<h1>{title.toLowerCase().replace}</h1>
 ```
 
 ## 5.1.2 배열을 JSX로 매핑하기
@@ -173,6 +173,8 @@ function Menu(props){
 ```
 
 ### Menu 내 recipe component
+data 배열 속 프로퍼티(name, ingredients, step) 전체를 일일히 한땀 한땀 불러옴. 
+**스프레드 연산자**를 통해 전체를 불러올 수 있다.
 ```jsx
 <div className="recipes">
   {props.recipe.map((recipe, i) => (
@@ -186,19 +188,21 @@ function Menu(props){
 </div>
 ```
 
-### Menu 내 recipe component 개선
+### Menu 내 recipe component 개선 (스프레드 연산자)
 ```jsx
 {
-  props.recipe.map((recipe, i) => <Recipe key={i} {...recipe} />);
+  props.recipe.map((recipe, i) => 
+    <Recipe key={i} {...recipe} />
+  );
 }
 ```
 
-**스프레드 연산자**는 recipe 객체의 각 필드를 Recipe 컴포넌트의 프로퍼티로 추가해준다. 
-이런 단축 표기법은 모든 프로퍼티를 Recipe 컴포넌트에게 제공한다.
+**스프레드 연산자**는 recipe 객체의 각 필드를 Recipe 컴포넌트의 프로퍼티(name, ingredients, step)로 추가해준다.    
+이런 단축 표기법은 모든 프로퍼티(name, ingredients, step)를 Recipe 컴포넌트에게 제공한다.
 이런 기능이 좋을 때도 있지만 컴포넌트에 너무 많은 프로퍼티를 추가하게 될 수도 있다.
 
-### Menu component 개선
-Menu component를 개선시킬 수 있는 다른 부분으로는 props인자를 받는 부분이 있다. 객체 구조분해를 사용하면 이 함수 내부로 변수 영역을 한정시킬 수 있다. 이렇게 하면 직접 title과 recipe를 사용할 수 있고 항상 props를 덧붙여야하는 번거로움을 줄일 수 있다.
+### Menu component 개선 (객체 구조분해)
+Menu component를 개선시킬 수 있는 다른 부분으로는 props인자를 받는 부분이 있다. **객체 구조분해**를 사용하면 이 함수 내부로 변수 영역을 한정시킬 수 있다. 이렇게 하면 직접 title과 recipe를 사용할 수 있고 항상 props를 덧붙여야하는 번거로움을 줄일 수 있다.
 
 ```jsx
 function Menu({props, recipes}){
@@ -442,7 +446,7 @@ recipe-app(폴더)
 ```
 
 ### 2. 컴포넌트 모듈로 나누기
-현재 Recipe 컴포넌트는 상당히 많은 일을 한다. 조리법 제목을 표시하고, 재료들의 ul을 만들고 조리 절차의 각 단계를 p로 만들어서 표시한다. 이 컴포넌트를 Recipe.js 파일에 넣어야 한다. JSX를 사용하는 파일마다 맨 위에 react를 임포트하는 문장이 필요하다.
+현재 Recipe 컴포넌트는 상당히 많은 일을 한다. 조리법 제목을 표시하고, 재료들의 ul을 만들고 조리 절차의 각 단계를 li로 만들어서 표시한다. 이 컴포넌트를 Recipe.js 파일에 넣어야 한다. JSX를 사용하는 파일마다 맨 위에 react를 임포트하는 문장이 필요하다.
 
 ```jsx
 // ./src/components/Recipe.js
@@ -525,7 +529,7 @@ export default function IngredientsList({list}){
 }
 ```
 
-다음과 같이 스프레드 연사자를 사용하는 것은
+다음과 같이 스프레드 연산자를 사용하는 것은
 
 ```jsx
 <Ingredient {...ingredient} />
@@ -583,12 +587,12 @@ function Recipe({name, ingredients, steps}){
 export default Recipe;
 ```
 
-먼저 사용하려는 두 컴포넌트 IngredientsList와 Instructions를 임포트해여한다. 이제 이들을 사용해서 Recipe 컴포넌트를 만든다.  
+먼저 사용하려는 두 컴포넌트 IngredientsList와 Instructions를 임포트해야한다. 이제 이들을 사용해서 Recipe 컴포넌트를 만든다.  
 한 함수 안에서 전체 조리법을 복잡하게 생성하는 대신에 작은 컴포넌트를 합성해서 좀 더 선언적인 방법으로 만들 수 있다.  
 이 코드는 더 멋지고 간단할 뿐만 아니라 이해하기도 쉽다.  
 이 코드를 보면 Recipe 컴포넌트가 조리법 이름을 표시하고 재료 목록과 절차를 표현하는 방법을 별도의 더 단순한 컴포넌트로 추상화해 표현한다.  
   
-모듈화한 접근 방법에서 보면 Menu 컴포넌트도 상당히 비슷하다. 중요한 차이점은 Menu를 별도의 파일로 분리하고 필요한 다른 모듈을 임포트한 다음에 Menu 컴포넌트 즈신을 익스포트해야 한다는 점이다.
+모듈화한 접근 방법에서 보면 Menu 컴포넌트도 상당히 비슷하다. 중요한 차이점은 Menu를 별도의 파일로 분리하고 필요한 다른 모듈을 임포트한 다음에 Menu 컴포넌트 자신을 익스포트해야 한다는 점이다.
 
 ```jsx
 // ./src/components/Menu.js
@@ -613,12 +617,234 @@ function Menu({recipes}){
 }
 export default Menu;
 ```
+Menu 컴포넌트를 렌더링할때도 여전히 ReactDOM을 사용해야 한다. 
+프로젝트의 주 파일은 여전히 index.js이다. 이 파일이 DOM에 컴포넌트를 렌더링한다.
+이 파일을 만들어 보자. 
 
 ```jsx
+// ./src/index.js
+
+import React from "react";
+import {render} from "react-dom";
+import Menu from "./components/Menu";
+import data from "./data/recipe.json";
+
+render(<Menu recipes={data}>, document.getElementById("root"));
 ```
 
+맨 앞 네 문장은 이 앱이 작동하는데 필요한 모듈을 임포트한다.  
+react와 react-dom을 script 태그에서 임포트하는 대신 여기서 그 둘을 임포트해서 웹팩이 번들에 그 두 라이브러리를 추가하도록 만든다. 또한 Munu컴포넌트와 예제 데이터 배열을 임포트해야 한다.  
+예제 데이터 배열도 별도의 모듈로 분리했다. 그 안에는 '구운연어'와 '생선타코' 조리법이 들어 있다.
+  
+임포트한 변수들은 index.js 파일 안에서만 볼 수 있다. Menu 컴포는터를 렝더링할 때 조리법 데이터 배열을 Menu의 프로퍼티로 전달한다.
+  
+데이터는 recipe.json 파일에서 가져온다. 이번 장 앞에서 사용했던 데이터와 같은 데이터를 사요하되, 제대로된 JSON 형식을 지켜 작성한다.
+
 ```jsx
+[
+  {
+    "name": "구운 연어",
+    "ingredients": [
+      { "name": "연어", "amount": 500, "measurement": "그램" },
+      { "name": "잣", "amount": 1, "measurement": "컵" },
+      { "name": "버터 상추", "amount": 2, "measurement": "컵" },
+      { "name": "옐로 스쿼시(Yellow Squash, 호박의 한 종류)", "amount": 1, "measurement": "개" },
+      { "name": "올리브 오일", "amount": 0.5, "measurement": "컵" },
+      { "name": "마늘", "amount": 3, "measurement": "쪽" }
+    ],
+    "steps": [
+      "오븐을 350도로 예열한다.",
+      "유리 베이킹 그릇에 올리브 오일을 두른다.",
+      "연어, 마늘, 잣을 그릇에 담는다.",
+      "오븐에서 15분간 익힌다.",
+      "옐로 스쿼시를 추가하고 다시 30분간 오븐에서 익힌다.",
+      "오븐에서 그릇을 꺼내서 15분간 식힌다음에 상추를 곁들여서 내놓는다."
+    ]
+  },
+  {
+    "name": "생선 타코",
+    "ingredients": [
+      { "name": "흰살생선", "amount": 500, "measurement": "그램" },
+      { "name": "치즈", "amount": 1, "measurement": "컵" },
+      { "name": "아이스버그 상추", "amount": 2, "measurement": "컵" },
+      { "name": "토마토", "amount": 2, "measurement": "개(큰것)"},
+      { "name": "또띠야", "amount": 3, "measurement": "개" }
+    ],
+    "steps": [
+      "생선을 그릴에 익힌다.",
+      "또띠야 3장 위에 생선을 얹는다.",
+      "또띠야에 얹은 생선 위에 상추, 토마토, 치즈를 얹는다."
+    ]
+  }
+]
 ```
+
+## 3. 웹팩 빌드 만들기
+웹팩으로 정적인 빌드 프로세스를 만들려면 몇몇 모듈을 설치해야 한다. npm을 사용해 필요한 모든 모듈을 설치할 수 있다.
+
+```jsx
+npm install --save-dev webpack webpack-cli
+```
+
+모듈화한 조리법 앱이 작동하게 만들려면 소스 코드를 어떻게 한 번들 파일로 만들 수 있는지 웹팩에게 알려줘야 한다.
+웹팩 버전 4.0.0 부터는 프로젝트를 번들하기 위해 설정 파일을 만들 필요가 없어졌다. 설정 파일이 없으면 웹팩이 코드를 패키징 하기 위한 디폴트 방식을 사용한다. 하지만 설정파일을 사용하면 설정을 원하는 대로 커스텀화할 수 있다. 게다가 설정 파일이 있으면 웹팩의 마법을 감추는 대신 명시저긍로 볼 수 있다. 디폴트 웹팩 설정 파일은 항삭 webpack.config.js이다.
+
+조리법 앱의 시작 파일은 index.js 이다. index.js는 React, ReactDOM, Menu.js 파일을 임포트한다. 브라우저에서 가장 먼저 실행해야하는 부분이 바로 이부분이다. 웹팩은 import문을 발견할 때마다 파일시스템에서 해당 모듈을 찾아서 번들에 포함시켜준다.
+index.js는 Menu.js를 임포트하고 Menu.js는 Recipe.js를 임포트하며 Recipe.js는 Instrunctions.js와 IngredientsList.js를 임포트하고, IngredientsList.js는 Ingredient.js를 임포트한다.
+웹팩은 이런 임포트 트리를 쫒아가면서필요한 모듈을 모두 번들에 넣어준다. 이 모든 파일을 순회하면 의존관계 그래프가 생긴다.
+의존 관계는 컴포넌트 파일이나 리액트와 같은 라이브러리 파일, 이미지 등 앱에게 필요한 요소를 뜻한다.
+그래프에서 각각의 파일을 원으로 표현한다면, 웹팩은 그래프를 만들기 위해 원과 원 사이에 선을 그어준다. 그리고 이렇게 만들어진 그래프가 전체 번들이다.
+
+```
+**import문**
+조리법 앱은 import 문을 사용하지만 노드나 현재 사용중인 대부분의 브라우저는 이를 지원하지 않는다. 그럼에도 불구하고 import문이 작동할 수 있는 이유는 바벨이 import를 require('모듈/경로')로 변환하기 때문이다. require 함수는 일반적으로 커먼 js에서 모듈을 임포트할 떄 사용하는 함수이다.
+```
+
+웹팩이 번들을 빌드할 때, JSX를 순수 리액트 코드로 변환하라고 지정할 필요가 있다.
+
+webpack.config.js 파일은 웹팩이 수행해야 하는 동작을 기술하는 자바스크립트 리터럴을 익스포트하는 모듈에 지나지 않는다. 이 설정 파일은 index.js 파일이 있는 프로젝트 루트 폴더에 저장되야 한다.
+
+```jsx
+// ./webpack.config.js
+
+var path = require("path");
+
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    path: path.join(__dirname, "dist", "assets"),
+    filename: "bundle.js"
+  }
+};
+```
+우선 웹팩에게 클라이언트의 시작 파일이 ./src/index.js라는 사실을 지정한다 웹팩은 그 파일안에 있는 import 문부터 시작해서 모든 의존 관계 그래프를 자동으로 만든다. 다음으로 번들을 ./dist/bundle.js라는 자바스크립트 파일에 출력하라고 지정한다. 웹팩은 이 위치에 패키징한 자바스크립트 파일을 넣어준다.
+  
+다음으로 필요한 바벨 의존 관계를 설치하자. babel-loader와 @babel/core가 필요하다.
+
+```jsx
+npm install babel-loader @babel/core --save-dev
+```
+
+이 다음에 필요한 명령은 특정 모듈을 실행할 때 사요할 로더 목록이다. 설정 파일에서 module이라는 필드 안에 이런 정보를 추가한다.
+
+```jsx
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    path: path.join(__dirname, "dist", "asset"),
+    filename: "bundle.js",
+  }
+  module: {
+    rules: [{test: /\.js$, exclude: /node_modules/, loader: babel-loader}]
+  }
+};
+```
+
+rules 필드는 웹팩에 사용할 여러 유형의 로더를 포함해야 하기 때문에 배열이다. 이 예제에서는 babel-loader만 포함시켰다. 
+각 로더는 자바스크립트 객체다. test 필드는 각 모듈에서 로더가 작용해야 하는 파일 경로를 찾기 위한 정규식이다.
+이 예제에서는 node_modules 폴더에서 찾은 자바스크립트 파일이 아닌 모든 자바스크립트 파일에 대해 babel-loader를 실행한다.
+
+이 시점에서 바벨을 실핼할 때 사용할 프리셋을 지정해야 한다. 프리셋을 지정하면 바벨에게 어떤 식으로 파일을 변환할지 알려주게 된다. 다른 말로 하면, 이를 통해 "바벨, 이 프로젝트에서 ESNext구문을 보면 코드를 브라우저가 이해할 수 있는 구문으로 변환하고 계속 진행 해줘" 리고 요구할 수 있다. 먼저 프리셋을 먼저 설치해야 한다.
+
+```jsx
+npm install @bable/preset-env @babel/preset-react --save-dev
+```
+추가로 프로젝트 루트에 .babelrc라는 파일을 만들자.
+
+```jsx
+"presets": ["@babel/preset-env", "@babel/preset-react"]
+```
+지금까지 실제 리액트 앱을 닮은 프로젝트를 만들었다. 더 진행해서 웹팩을 실행하면서 이 설정이 제대로 작동하나 살펴보자.
+
+웹팩은 정적으로 실행된다. 보통 앱을 서버에 배포하기 전에 번들을 만든다. npx라는 명령을 사용하면 명령줄에서 webpack을 실행할 수 있다.
+
+```jsx
+npx webpack --mode development
+```
+웹팩은 성공해서 번들을 만들거나 실패해서 오류 메세지를 표시한다. 대부분의 오류는 임포트 참조가 잘못된 경우 발생한다. 웹팩 오류를 디버길할 때는 import문에 사용한 파일 이름과파일 경로를 자세히 살펴봐야 한다.
+
+package.json 파일에 npm 스크립트를 추가해서 npm을 통해 웹팩을 간편하게 실행하는 지름 길을 만들 수도 있다.
+
+```jsx
+"script": {
+  "build": "webpack --mode production"
+},
+```
+
+지름길 스크립트를 추가한 다음에는 이 지름길을 사용해 번들을 생성하는 명령을 내릴 수 있다.
+
+```jsx
+npm run build
+```
+
+## 5.5.2 번들 로딩하기
+번들을 만들었다. 이제 뭘할 수 있을까? 웹팩은 번들을 dist 폴더에 넣는다. 이 폴더ㅗ에는 웹 서버에서 번들을 실핼할 때 필요한 파일들이 들어있다. dist총더에는 index.html파일이 포함되어야 한다. 
+index.html 파일이 있어여 리액트 Menu 컴포넌트를 마운트시킬 대상 div 엘리먼트를 찾을 수 있다.
+index.html 파일에는 방금 만들 번들을 로딩하기 위한 script 태그도 들어있다.
+
+```jsx
+// ./src/index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>리액트 조리법</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="assets/bundle.js"></script>
+</body>
+</html>
+```
+
+이 페이지가 조리법 앱의 홈페이지다. 이 페이지는 한 파일 bundle.js에 대한 HTTP 요청을 보냄으로 필요한 모든 자원을 로딩한다. dist안에 있는 파일들을 웹 서버에 배포하거나 노드나 루비 온 레일즈 같은 웹서버 어플리케이션을 통해 파일을 HTTP프로토콜로 서비스해야 한다.
+
+## 5.5.3 소스맵
+코드를 한 번들 파일로 만들면 브라우저에서 앱을 디버깅할 때 약간 곤란해진다.
+이런 문제를 소스맵을 통해 해결할 수 있다. 소스 맵은 번들과 소스 파일을 연결해주는 파일이다.
+웹팩에서는 webpack.config.js 파일에 몇 줄 추가하면 ㅇ런 소스 매핑을 추가할 수 있다.
+
+```jsx
+module.exports = {
+  ...
+  devtool: '#source-map' // 소스맵을 추가하려면 이 옵션을 덧붙여라
+};
+```
+
+devtool 프로퍼티를 #source-map으로 설정하면 웹팩이 소스 매핑을 사용하게 할 수 있다.
+다시 웹팩을 실행하면 assets 폴더에[ bundle.js와 bundle.map이라는 두 파일이 생긴다.
+  
+소스맵은 디버깅시 원 소스 코드를 사용할 수 있게 해준다. 브라우저의 개발자 도구에 있는 소스맵에서 webpack://이라고 쓰인 폴더를 찾을 수 있을 것이다. 그 폴더 안에는 번들에 들어있는 모든 소스 파일이 보여야 한다.
+  
+브라우저 디버거의 단계별 실행 기능을 활용해 이런 소스 파일을 디버깅할 수 있다. 소스코드 옆의 행 번호를 클릭하면 중단점을 설정할 수 있다. 브라우저를 새로고침하면 자바스크립트를 새로 실행하다가 아무 중단점이나 만나면 실행이 일시 중단된다. 영역 패널에서 각 영역에 속한 변수를 살펴보거나 감시 패널에 변수이름을 입력해 값을 추적할 수 있다.
+  
+##5.5.4 create-react-app
+이 도구는 리액트 프로젝트를 생성하는 명령줄 도구이다. 개발자들이 직접 웹팩, 바벨 등 여러도구의 설정을 손보지 않아도 빠르게 리액트프로젝트를 시작할 수 있다.
+패키지를 글로벌로 설치해야 사용가능하다.
+
+```jsx
+npm install -g create-react-app
+```
+설치 후 create-react-app 명령과 앱을 생성할 폴더의이름을 지정하면 앱을 만들 수 있다.
+
+```jsx
+create-react-app myproject
+```
+
+```
+npx를 사용하면 글로벌 설치를 하지 않아도 create-react-app을 호출할 수 있다.
+단지 npx create-react-app my-project를 실행하자. 
+```
+
+이 명령은 리액트 프로젝트를 my-project 폴더에 만들면서 React, ReactDOM, react-scripts에 대한 의존 관계를 설정해준다. react-scripts는 바벨 ESLint, 웹팩 등을 설치해서 개발자가 직접 그런 도구를 설정할 필요가 없게해준다.
+생성된 프로젝트 폴더 안에는 App.js파일이 들어있는 src 폴더가 있다.
+App.js 파일에서 루트 컴포넌트를 수정하거나 다른 컴포넌트 파일을 임포트할 수 있다.
+  
+조금 전에 만든 my-project 폴더를 현재 폴더를 만든 후, npm start를 실행할 수 있다.
+yarn start를 실행할 수도 있다. 이런 명령들은 애플리케이션을 3000번 포트에서 실행한다.
+  
+npm test나 yarn test를 통해 테스트를 실행할 수도 있다. yarn의 경우에는 yarn build를 하자, 이 명령은 변환과 축소를 거친 프로덕션에 사용할 수 있는 번들을 만든다.
 
 ```jsx
 ```
