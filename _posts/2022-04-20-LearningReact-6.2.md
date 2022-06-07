@@ -105,7 +105,7 @@ setSelectedStars 함수를 사용해 selectStars의 값을 바꿀 때마다 Star
 사용자가 Star를 클릭할 때마다 StarRating 컴포넌트가 다시 렌더링 된다.  
 사용자가 Star를 클릭하면 해당 Star의 onClick 프로퍼티가 호출된다. 
 onSelect 프로퍼티는 setSelectedStars 함수를 호출해서 방금 선택한 별의 개수를 전송한다.  
-map함수의 i변수를 사용해 개수를 쉽게 계산할 수 있다. map이 첫 번째 Star를 렌더링할 떄 i의 값은 0이다. 
+map함수의 i변수를 사용해 개수를 쉽게 계산할 수 있다. map이 첫 번째 Star를 렌더링할 때 i의 값은 0이다. 
 따라서 i에 1을 더해서 올바른 별의 개수를 얻을 수 있다.  
 setSelectedStars가 호출되면서 새로운 selectedStars 값을 사용해 StarRating 컴포넌트가 호출된다.
 
